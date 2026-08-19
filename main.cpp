@@ -94,7 +94,6 @@ void openPages(short &choose)
         }
         else
         {
-            resetScreen();
             return;
         }
         printMainMenuScreen();

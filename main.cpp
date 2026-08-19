@@ -13,12 +13,14 @@ struct stPlayer
 {
     int playerHP     = 100;
     enActions playerChoose;
+    string playerChooseText = "";
 };
 
 struct stComputer
 {
     int computerHP     = 100;
     enActions computerChoose;
+    string computerChooseText = "";
 };
 
 int randomNumber(int from, int to)
@@ -106,7 +108,7 @@ string getChooseText(enActions action)
     return "Wrong";
 }
 
-void pageStartGame(stPlayer player, stComputer computer)
+void startGame(stPlayer player, stComputer computer)
 {
     resetScreen();
     short userInput = 0;
@@ -134,7 +136,10 @@ void pageStartGame(stPlayer player, stComputer computer)
     
 
     player.playerChoose = (enActions)userInput;
+    player.playerChooseText = getChooseText(player.playerChoose);
+
     computer.computerChoose = (enActions)fillComputerInput();
+    computer.computerChooseText = getChooseText(computer.computerChoose);
 }
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)
@@ -143,7 +148,7 @@ void PlayGame(short &choose, stPlayer player, stComputer computer)
     {   
         if (choose == 1)
         {
-            pageStartGame(player, computer);
+            startGame(player, computer);
         }
         else if (choose == 2)
         {

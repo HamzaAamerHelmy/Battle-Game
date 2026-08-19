@@ -1,7 +1,6 @@
 #include <iostream>
+#include <conio.h>
 using namespace std;
-
-
 
 struct stPlayer
 {
@@ -22,8 +21,15 @@ int randomNumber(int from, int to)
     return randNum;
 }
 
+void resetScreen()
+{
+    system("cls");
+}
+
 void printMainMenuScreen()
 {
+    resetScreen();
+    
     cout << "========================================" << endl << endl;
     cout << "              BATTLE GAME               " << endl << endl;
     cout << "========================================" << endl << endl << endl;
@@ -53,6 +59,48 @@ short readMainMenuChoose()
     return userInput;
 }
 
+void PageHowToPlay()
+{
+    resetScreen();
+
+    cout << "========================================" << endl << endl;
+    cout << "              HOW TO PLAY              " << endl << endl;
+    cout << "========================================" << endl << endl << endl;
+    cout << "You will battle against the computer." << endl << endl;
+    cout << "Each Round, choose one action: " << endl << endl;
+    cout << "1. Attack" << endl;
+    cout << "2. Heal" << endl;
+    cout << "3. Defend" << endl << endl;
+    cout << "Reduce The enemy's HP to 0 to win" << endl << endl;
+    cout << "========================================" << endl << endl;
+    cout << "Press any key to return ..";
+    char input = _getch();
+    
+
+    resetScreen();
+}
+
+void openPages(short &choose)
+{
+    while(true)
+    {   
+        if (choose == 1)
+        {
+            /* code */
+        }
+        else if (choose == 2)
+        {
+            PageHowToPlay();
+        }
+        else
+        {
+            return;
+        }
+        printMainMenuScreen();
+        choose = readMainMenuChoose();
+    }
+}
+
 int main()
 {
     srand((unsigned)time(NULL));
@@ -63,6 +111,8 @@ int main()
 
     printMainMenuScreen();
     short choose = readMainMenuChoose();
+
+    openPages(choose);
 
     return 0;
 }

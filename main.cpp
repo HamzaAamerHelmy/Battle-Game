@@ -86,6 +86,26 @@ void pageHowToPlay()
     resetScreen();
 }
 
+int fillComputerInput()
+{
+    return rand() % (enActions::attack, enActions::defend + 1);
+}
+
+string getChooseText(enActions action)
+{
+    switch (action)
+    {
+    case enActions::attack:
+        return "ATTACK";
+    case enActions::heal:
+        return "HEAL";
+    case enActions::defend:
+        return "DEFEND";
+    }
+
+    return "Wrong";
+}
+
 void pageStartGame(stPlayer player, stComputer computer)
 {
     resetScreen();
@@ -114,6 +134,7 @@ void pageStartGame(stPlayer player, stComputer computer)
     
 
     player.playerChoose = (enActions)userInput;
+    computer.computerChoose = (enActions)fillComputerInput();
 }
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)

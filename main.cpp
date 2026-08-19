@@ -29,7 +29,7 @@ void resetScreen()
 void printMainMenuScreen()
 {
     resetScreen();
-    
+
     cout << "========================================" << endl << endl;
     cout << "              BATTLE GAME               " << endl << endl;
     cout << "========================================" << endl << endl << endl;
@@ -94,6 +94,7 @@ void openPages(short &choose)
         }
         else
         {
+            resetScreen();
             return;
         }
         printMainMenuScreen();

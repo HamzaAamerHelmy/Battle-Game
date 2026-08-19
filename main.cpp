@@ -114,8 +114,6 @@ void pageStartGame(stPlayer player, stComputer computer)
     
 
     player.playerChoose = (enActions)userInput;
-
-    
 }
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)

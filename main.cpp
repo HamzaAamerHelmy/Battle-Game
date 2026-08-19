@@ -2,6 +2,13 @@
 #include <conio.h>
 using namespace std;
 
+enum enActions
+{
+    attack = 1,
+    heal = 2,
+    defend = 3
+};
+
 struct stPlayer
 {
     int playerHP     = 100;

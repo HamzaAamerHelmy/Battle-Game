@@ -19,6 +19,7 @@ int randomNumber(int from, int to)
 {
     to += 1;
     int randNum = rand() % (to - from) + from;
+    return randNum;
 }
 
 void printMainMenuScreen()
@@ -49,6 +50,7 @@ short readMainMenuChoose()
         
     } while (userInput > 3 || userInput < 1);
     
+    return userInput;
 }
 
 int main()

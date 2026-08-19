@@ -12,13 +12,13 @@ enum enActions
 struct stPlayer
 {
     int playerHP     = 100;
-    int playerChoose = 0;
+    enActions playerChoose;
 };
 
 struct stComputer
 {
     int computerHP     = 100;
-    int computerChoose = 0;
+    enActions computerChoose;
 };
 
 int randomNumber(int from, int to)
@@ -66,7 +66,7 @@ short readMainMenuChoose()
     return userInput;
 }
 
-void PageHowToPlay()
+void pageHowToPlay()
 {
     resetScreen();
 
@@ -82,22 +82,53 @@ void PageHowToPlay()
     cout << "========================================" << endl << endl;
     cout << "Press any key to return ..";
     char input = _getch();
-    
 
     resetScreen();
 }
 
-void openPages(short &choose)
+void pageStartGame(stPlayer player, stComputer computer)
+{
+    resetScreen();
+    short userInput = 0;
+    cout << "========================================" << endl << endl;
+    cout << "               BATTLE GAME              " << endl << endl;
+    cout << "========================================" << endl << endl << endl;
+    cout << "      HP: " << player.playerHP << "              HP: " << computer.computerHP << "      " << endl << endl << endl;
+    cout << "----------------------------------------" << endl << endl << endl;
+    cout << "        1. Attack" << endl;
+    cout << "        2. Heal" << endl;
+    cout << "        3. Defend" << endl << endl << endl;
+    cout << "----------------------------------------" << endl << endl << endl;
+    do
+    {
+        cout << "Choose Your Action: ";
+        cin >> userInput;
+
+        if (userInput > 3 || userInput < 1)
+        {
+            cout << "Wrong Input!" << endl;
+            cout << "Please enter A valid number! .." << endl << endl;
+        }
+        
+    } while (userInput > 3 || userInput < 1);
+    
+
+    player.playerChoose = (enActions)userInput;
+
+    
+}
+
+void PlayGame(short &choose, stPlayer player, stComputer computer)
 {
     while(true)
     {   
         if (choose == 1)
         {
-            /* code */
+            pageStartGame(player, computer);
         }
         else if (choose == 2)
         {
-            PageHowToPlay();
+            pageHowToPlay();
         }
         else
         {
@@ -119,7 +150,7 @@ int main()
     printMainMenuScreen();
     short choose = readMainMenuChoose();
 
-    openPages(choose);
+    PlayGame(choose, player, computer);
 
     return 0;
 }

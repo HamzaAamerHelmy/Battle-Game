@@ -179,8 +179,8 @@ void checkChooses(stPlayer player, stComputer computer)
         }
         else
         {
-            computer.computerHP = computer.computerHP - randomNumberAttack;
-            cout << "You dealt " << randomNumberAttack << " damage!" << endl;
+            player.playerHP = player.playerHP - randomNumberAttack;
+            cout << "Computer dealt " << randomNumberAttack << " damage!" << endl;
         }
         break;
     }
@@ -188,12 +188,12 @@ void checkChooses(stPlayer player, stComputer computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (!player.playerHP >= 100)
+        if (!computer.computerHP >= 100)
         {
-            player.playerHP = player.playerHP + randomNumberHeal;
+            computer.computerHP = computer.computerHP + randomNumberHeal;
         }
 
-        cout << "You recovered " << randomNumberHeal << " HP!" << endl;
+        cout << "Computer recovered " << randomNumberHeal << " HP!" << endl;
         break;
     }
     }

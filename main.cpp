@@ -152,10 +152,7 @@ void checkChooses(stPlayer &player, stComputer &computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (player.playerHP >= 100)
-        {
-        }
-        else
+        if (!player.playerHP >= 100)
         {
             player.playerHP = player.playerHP + randomNumberHeal;
         }
@@ -190,10 +187,7 @@ void checkChooses(stPlayer &player, stComputer &computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (computer.computerHP >= 100)
-        {
-        }
-        else
+        if (!computer.computerHP >= 100)
         {
             computer.computerHP = computer.computerHP + randomNumberHeal;
         }

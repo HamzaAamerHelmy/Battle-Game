@@ -302,7 +302,7 @@ string pageLose(int playerHP, int computerHP)
     return "Wrong";
 }
 
-void startGame(stPlayer player, stComputer computer)
+bool startGame(stPlayer player, stComputer computer)
 {
     bool checkHP = false;
     while (checkHP == false)
@@ -400,11 +400,11 @@ void startGame(stPlayer player, stComputer computer)
         }
         else if (pageWin(player.playerHP, computer.computerHP) == "Main")
         {
-            return;
+            return true;
         }
         else
         {
-            std::exit;
+            return false;
         }
         
     }
@@ -420,13 +420,14 @@ void startGame(stPlayer player, stComputer computer)
         }
         else if (pageLose(player.playerHP, computer.computerHP) == "Main")
         {
-            return;
+            return true;
         }
         else
         {
-            std::exit;
+            return false;
         }
     }
+    return false;
 }
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)
@@ -437,7 +438,10 @@ void PlayGame(short &choose, stPlayer player, stComputer computer)
     {
         if (choose == 1)
         {
-            startGame(player, computer);
+            if (startGame(player, computer) == false)
+            {
+                return;
+            }
         }
         else if (choose == 2)
         {

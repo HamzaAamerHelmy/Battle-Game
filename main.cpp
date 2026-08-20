@@ -152,7 +152,10 @@ void checkChooses(stPlayer &player, stComputer &computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (!player.playerHP >= 100)
+        if (player.playerHP >= 100)
+        {
+        }
+        else
         {
             player.playerHP = player.playerHP + randomNumberHeal;
         }
@@ -192,7 +195,10 @@ void checkChooses(stPlayer &player, stComputer &computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (!computer.computerHP >= 100)
+        if (computer.computerHP >= 100)
+        {
+        }
+        else
         {
             computer.computerHP = computer.computerHP + randomNumberHeal;
         }
@@ -210,7 +216,7 @@ void checkChooses(stPlayer &player, stComputer &computer)
 
 void startGame(stPlayer player, stComputer computer)
 {
-    do
+    while (true)
     {
         resetScreen();
         short userInput = 0;
@@ -271,20 +277,25 @@ void startGame(stPlayer player, stComputer computer)
 
         cout << endl;
         cout << "----------------------------------------" << endl
-             << endl;
+             << endl << endl;
         cout << "Your HP: " << player.playerHP << endl;
         cout << "Enemy HP: " << computer.computerHP << endl
-             << endl;
+             << endl << endl;
         cout << "----------------------------------------" << endl
              << endl;
+        if (player.playerHP == 0 || computer.computerHP == 0)
+        {
+            break;
+        }
+        
         cout << "Press any key to continue ..";
         char input = _getch();
-    } while (player.playerHP > 0 || computer.computerHP > 0);
+    }
 }
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)
 {
-    while (true)
+    while (choose != 3)
     {
         if (choose == 1)
         {
@@ -293,10 +304,6 @@ void PlayGame(short &choose, stPlayer player, stComputer computer)
         else if (choose == 2)
         {
             pageHowToPlay();
-        }
-        else
-        {
-            return;
         }
         printMainMenuScreen();
         choose = readMainMenuChoose();

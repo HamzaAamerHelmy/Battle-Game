@@ -131,7 +131,6 @@ void checkChooses(stPlayer &player, stComputer &computer)
     {
         cout << "Both defended ." << endl;
     }
-    
 
     switch (player.playerAction)
     {
@@ -220,6 +219,89 @@ void checkChooses(stPlayer &player, stComputer &computer)
     }
 }
 
+short printPlayAgain()
+{
+    short choose = 0;
+
+    do
+    {
+        cout << "----------------------------------------" << endl
+             << endl;
+        cout << "        1. Play Again" << endl;
+        cout << "        2. Main Menu" << endl;
+        cout << "        3. Exit" << endl
+             << endl;
+        cout << "Choose: ";
+        cin >> choose;
+    } while (choose > 3 || choose < 1);
+
+    return choose;
+}
+
+string pageWin(int playerHP, int computerHP)
+{
+    resetScreen();
+    cout << "========================================" << endl
+         << endl;
+    cout << "                YOU WIN!                " << endl
+         << endl;
+    cout << "========================================" << endl
+         << endl
+         << endl;
+    cout << "             🎉 VICTORY! 🎉            " << endl
+         << endl;
+    cout << "Your HP: " << playerHP << endl;
+    cout << "Enemy HP: " << computerHP << endl
+         << endl
+         << endl;
+    if (printPlayAgain() == 1)
+    {
+        return "Play";
+    }
+    else if (printPlayAgain() == 2)
+    {
+        return "Main";
+    }
+    else
+    {
+        return "Exit";
+    }
+
+    return "Wrong";
+}
+
+string pageLose(int playerHP, int computerHP)
+{
+    resetScreen();
+    cout << "========================================" << endl
+         << endl;
+    cout << "                YOU LOST!               " << endl
+         << endl;
+    cout << "========================================" << endl
+         << endl
+         << endl;
+    cout << "               GAME OVER                " << endl
+         << endl;
+    cout << "Your HP: " << playerHP << endl;
+    cout << "Computer HP: " << computerHP << endl
+         << endl
+         << endl;
+    if (printPlayAgain() == 1)
+    {
+        return "Play";
+    }
+    else if (printPlayAgain() == 2)
+    {
+        return "Main";
+    }
+    else
+    {
+        return "Exit";
+    }
+
+    return "Wrong";
+}
+
 void startGame(stPlayer player, stComputer computer)
 {
     bool checkHP = false;
@@ -235,7 +317,8 @@ void startGame(stPlayer player, stComputer computer)
              << endl
              << endl;
         cout << "        YOU              COMPUTER" << endl;
-        cout << "      HP: " << player.playerHP << " HP: " << computer.computerHP << endl << endl;
+        cout << "      HP: " << player.playerHP << "             HP: " << computer.computerHP << endl
+             << endl;
         cout << "----------------------------------------" << endl
              << endl
              << endl;
@@ -283,10 +366,12 @@ void startGame(stPlayer player, stComputer computer)
 
         cout << endl;
         cout << "----------------------------------------" << endl
-             << endl << endl;
+             << endl
+             << endl;
         cout << "Your HP: " << player.playerHP << endl;
         cout << "Enemy HP: " << computer.computerHP << endl
-             << endl << endl;
+             << endl
+             << endl;
         cout << "----------------------------------------" << endl
              << endl;
 
@@ -294,9 +379,53 @@ void startGame(stPlayer player, stComputer computer)
         {
             checkHP = true;
         }
-        
+
         cout << "Press any key to continue ..";
         char input = _getch();
+    }
+
+    if (player.playerHP <= 0 && computer.computerHP <= 0)
+    {
+        /* code */
+    }
+    else if (computer.computerHP <= 0)
+    {
+        computer.computerHP = 0;
+        if (pageWin(player.playerHP, computer.computerHP) == "Play")
+        {
+            resetScreen();
+            player.playerHP = 100;
+            computer.computerHP = 100;
+            startGame(player, computer);
+        }
+        else if (pageWin(player.playerHP, computer.computerHP) == "Main")
+        {
+            return;
+        }
+        else
+        {
+            std::exit;
+        }
+        
+    }
+    else
+    {
+        player.playerHP = 0;
+        if (pageLose(player.playerHP, computer.computerHP) == "Play")
+        {
+            resetScreen();
+            player.playerHP = 100;
+            computer.computerHP = 100;
+            startGame(player, computer);
+        }
+        else if (pageLose(player.playerHP, computer.computerHP) == "Main")
+        {
+            return;
+        }
+        else
+        {
+            std::exit;
+        }
     }
 }
 
@@ -327,7 +456,6 @@ int main()
 
     stComputer computer;
 
-    
     short choose = 0;
 
     PlayGame(choose, player, computer);

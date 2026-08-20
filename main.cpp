@@ -25,7 +25,7 @@ struct stComputer
 
 int randomNumber(int from, int to)
 {
-    from += 1;
+    to += 1;
     int randNum = rand() % (to - from) + from;
     return randNum;
 }
@@ -107,7 +107,7 @@ void pageHowToPlay()
 
 int fillComputerInput()
 {
-    return rand() % (3 - 1) + 1;
+    return randomNumber(enActions::attack, enActions::defend);
 }
 
 string getChooseText(enActions action)
@@ -203,9 +203,9 @@ void checkChooses(stPlayer &player, stComputer &computer)
             computer.computerHP = computer.computerHP + randomNumberHeal;
         }
 
-        while (player.playerHP > 100)
+        while (computer.computerHP > 100)
         {
-            player.playerHP--;
+            computer.computerHP--;
         }
 
         cout << "Computer recovered " << randomNumberHeal << " HP!" << endl;
@@ -216,7 +216,8 @@ void checkChooses(stPlayer &player, stComputer &computer)
 
 void startGame(stPlayer player, stComputer computer)
 {
-    while (true)
+    bool checkHP = false;
+    while (checkHP == false)
     {
         resetScreen();
         short userInput = 0;
@@ -283,9 +284,10 @@ void startGame(stPlayer player, stComputer computer)
              << endl << endl;
         cout << "----------------------------------------" << endl
              << endl;
-        if (player.playerHP == 0 || computer.computerHP == 0)
+
+        if (player.playerHP <= 0 || computer.computerHP <= 0)
         {
-            break;
+            checkHP = true;
         }
         
         cout << "Press any key to continue ..";
@@ -295,6 +297,8 @@ void startGame(stPlayer player, stComputer computer)
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)
 {
+    printMainMenuScreen();
+    choose = readMainMenuChoose();
     while (choose != 3)
     {
         if (choose == 1)
@@ -318,8 +322,8 @@ int main()
 
     stComputer computer;
 
-    printMainMenuScreen();
-    short choose = readMainMenuChoose();
+    
+    short choose = 0;
 
     PlayGame(choose, player, computer);
 

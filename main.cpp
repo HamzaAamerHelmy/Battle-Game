@@ -127,6 +127,12 @@ string getChooseText(enActions action)
 
 void checkChooses(stPlayer &player, stComputer &computer)
 {
+    if (player.playerAction == enActions::defend && computer.computerAction == enActions::defend)
+    {
+        cout << "Both defended ." << endl;
+    }
+    
+
     switch (player.playerAction)
     {
     case enActions::attack:
@@ -136,7 +142,7 @@ void checkChooses(stPlayer &player, stComputer &computer)
         if (computer.computerAction == enActions::defend)
         {
             computer.computerHP = computer.computerHP - (randomNumberAttack / 2);
-            cout << "Computer is defending ." << endl
+            cout << "Computer defended ." << endl
                  << endl;
             cout << "Your damage: " << randomNumberAttack << endl;
             cout << "Actual damage: " << (randomNumberAttack / 2) << endl;
@@ -179,7 +185,7 @@ void checkChooses(stPlayer &player, stComputer &computer)
         if (player.playerAction == enActions::defend)
         {
             player.playerHP = player.playerHP - (randomNumberAttack / 2);
-            cout << "You is defending ." << endl
+            cout << "You defended ." << endl
                  << endl;
             cout << "Incoming damage: " << randomNumberAttack << endl;
             cout << "Actual damage: " << (randomNumberAttack / 2) << endl;
@@ -228,7 +234,7 @@ void startGame(stPlayer player, stComputer computer)
         cout << "========================================" << endl
              << endl
              << endl;
-        cout << "      HP: " << player.playerHP << "              HP: " << computer.computerHP << "      " << endl
+        cout << "      Your HP: " << player.playerHP << "              Computer HP: " << computer.computerHP << "      " << endl
              << endl
              << endl;
         cout << "----------------------------------------" << endl

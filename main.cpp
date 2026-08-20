@@ -107,7 +107,7 @@ void pageHowToPlay()
 
 int fillComputerInput()
 {
-    return rand() % (enActions::attack, enActions::defend);
+    return rand() % (3 - 1) + 1;
 }
 
 string getChooseText(enActions action)
@@ -125,7 +125,7 @@ string getChooseText(enActions action)
     return "Wrong";
 }
 
-void checkChooses(stPlayer player, stComputer computer)
+void checkChooses(stPlayer &player, stComputer &computer)
 {
     switch (player.playerAction)
     {
@@ -152,7 +152,10 @@ void checkChooses(stPlayer player, stComputer computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (!player.playerHP >= 100)
+        if (player.playerHP >= 100)
+        {
+        }
+        else
         {
             player.playerHP = player.playerHP + randomNumberHeal;
         }
@@ -162,7 +165,6 @@ void checkChooses(stPlayer player, stComputer computer)
     }
     }
 
-    
     switch (computer.computerAction)
     {
     case enActions::attack:
@@ -174,7 +176,7 @@ void checkChooses(stPlayer player, stComputer computer)
             player.playerHP = player.playerHP - (randomNumberAttack / 2);
             cout << "You is defending ." << endl
                  << endl;
-            cout << "Computer damage: " << randomNumberAttack << endl;
+            cout << "Incoming damage: " << randomNumberAttack << endl;
             cout << "Actual damage: " << (randomNumberAttack / 2) << endl;
         }
         else
@@ -188,7 +190,10 @@ void checkChooses(stPlayer player, stComputer computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (!computer.computerHP >= 100)
+        if (computer.computerHP >= 100)
+        {
+        }
+        else
         {
             computer.computerHP = computer.computerHP + randomNumberHeal;
         }
@@ -201,64 +206,75 @@ void checkChooses(stPlayer player, stComputer computer)
 
 void startGame(stPlayer player, stComputer computer)
 {
-    resetScreen();
-    short userInput = 0;
-    cout << "========================================" << endl
-         << endl;
-    cout << "               BATTLE GAME              " << endl
-         << endl;
-    cout << "========================================" << endl
-         << endl
-         << endl;
-    cout << "      HP: " << player.playerHP << "              HP: " << computer.computerHP << "      " << endl
-         << endl
-         << endl;
-    cout << "----------------------------------------" << endl
-         << endl
-         << endl;
-    cout << "        1. Attack" << endl;
-    cout << "        2. Heal" << endl;
-    cout << "        3. Defend" << endl
-         << endl
-         << endl;
-    cout << "----------------------------------------" << endl
-         << endl
-         << endl;
     do
     {
-        cout << "Choose Your Action: ";
-        cin >> userInput;
-
-        if (userInput > 3 || userInput < 1)
+        resetScreen();
+        short userInput = 0;
+        cout << "========================================" << endl
+             << endl;
+        cout << "               BATTLE GAME              " << endl
+             << endl;
+        cout << "========================================" << endl
+             << endl
+             << endl;
+        cout << "      HP: " << player.playerHP << "              HP: " << computer.computerHP << "      " << endl
+             << endl
+             << endl;
+        cout << "----------------------------------------" << endl
+             << endl
+             << endl;
+        cout << "        1. Attack" << endl;
+        cout << "        2. Heal" << endl;
+        cout << "        3. Defend" << endl
+             << endl
+             << endl;
+        cout << "----------------------------------------" << endl
+             << endl
+             << endl;
+        do
         {
-            cout << "Wrong Input!" << endl;
-            cout << "Please enter A valid number! .." << endl
-                 << endl;
-        }
+            cout << "Choose Your Action: ";
+            cin >> userInput;
 
-    } while (userInput > 3 || userInput < 1);
+            if (userInput > 3 || userInput < 1)
+            {
+                cout << "Wrong Input!" << endl;
+                cout << "Please enter A valid number! .." << endl
+                     << endl;
+            }
 
-    player.playerAction = (enActions)userInput;
-    player.playerActionText = getChooseText(player.playerAction);
+        } while (userInput > 3 || userInput < 1);
 
-    computer.computerAction = (enActions)fillComputerInput();
-    computer.computerActionText = getChooseText(computer.computerAction);
+        resetScreen();
+        player.playerAction = (enActions)userInput;
+        player.playerActionText = getChooseText(player.playerAction);
 
-    resetScreen();
+        computer.computerAction = (enActions)fillComputerInput();
+        computer.computerActionText = getChooseText(computer.computerAction);
 
-    cout << "========================================" << endl
-         << endl;
-    cout << "                 BATTLE                 " << endl
-         << endl;
-    cout << "========================================" << endl
-         << endl
-         << endl;
-    cout << "You Chose: " << player.playerActionText << endl;
-    cout << "Computer Chose: " << computer.computerActionText << endl << endl;
+        cout << "========================================" << endl
+             << endl;
+        cout << "                 BATTLE                 " << endl
+             << endl;
+        cout << "========================================" << endl
+             << endl
+             << endl;
+        cout << "You Chose: " << player.playerActionText << endl;
+        cout << "Computer Chose: " << computer.computerActionText << endl
+             << endl;
 
-    checkChooses(player, computer);
-    cout << "Press any key to return ..";
-    char input = _getch();
+        checkChooses(player, computer);
+
+        cout << "----------------------------------------" << endl
+             << endl;
+        cout << "Your HP: " << player.playerHP << endl;
+        cout << "Enemy HP: " << computer.computerHP << endl
+             << endl;
+        cout << "----------------------------------------" << endl
+             << endl;
+        cout << "Press any key to continue ..";
+        char input = _getch();
+    } while (player.playerHP != 0 || computer.computerHP != 0);
 }
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)

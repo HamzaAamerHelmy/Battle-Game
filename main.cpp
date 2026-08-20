@@ -234,7 +234,7 @@ void startGame(stPlayer player, stComputer computer)
         cout << "========================================" << endl
              << endl
              << endl;
-        cout << "      Your HP: " << player.playerHP << "              Computer HP: " << computer.computerHP << "      " << endl
+        cout << " Your HP: " << player.playerHP << "          Computer HP: " << computer.computerHP << "" << endl
              << endl
              << endl;
         cout << "----------------------------------------" << endl

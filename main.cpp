@@ -157,6 +157,11 @@ void checkChooses(stPlayer &player, stComputer &computer)
             player.playerHP = player.playerHP + randomNumberHeal;
         }
 
+        while (player.playerHP > 100)
+        {
+            player.playerHP--;
+        }
+
         cout << "You recovered " << randomNumberHeal << " HP!" << endl;
         break;
     }
@@ -190,6 +195,11 @@ void checkChooses(stPlayer &player, stComputer &computer)
         if (!computer.computerHP >= 100)
         {
             computer.computerHP = computer.computerHP + randomNumberHeal;
+        }
+
+        while (player.playerHP > 100)
+        {
+            player.playerHP--;
         }
 
         cout << "Computer recovered " << randomNumberHeal << " HP!" << endl;
@@ -259,6 +269,7 @@ void startGame(stPlayer player, stComputer computer)
 
         checkChooses(player, computer);
 
+        cout << endl;
         cout << "----------------------------------------" << endl
              << endl;
         cout << "Your HP: " << player.playerHP << endl;
@@ -268,7 +279,7 @@ void startGame(stPlayer player, stComputer computer)
              << endl;
         cout << "Press any key to continue ..";
         char input = _getch();
-    } while (player.playerHP != 0 || computer.computerHP != 0);
+    } while (player.playerHP > 0 || computer.computerHP > 0);
 }
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)

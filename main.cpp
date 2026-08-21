@@ -248,7 +248,7 @@ string pageWin(int playerHP, int computerHP)
     cout << "========================================" << endl
          << endl
          << endl;
-    cout << "             🎉 VICTORY! 🎉            " << endl
+    cout << "               VICTORY!             " << endl
          << endl;
     cout << "Your HP: " << playerHP << endl;
     cout << "Enemy HP: " << computerHP << endl
@@ -280,7 +280,7 @@ string pageLose(int playerHP, int computerHP)
     cout << "========================================" << endl
          << endl
          << endl;
-    cout << "               💀GAME OVER💀                " << endl
+    cout << "                GAME OVER                " << endl
          << endl;
     cout << "Your HP: " << playerHP << endl;
     cout << "Computer HP: " << computerHP << endl

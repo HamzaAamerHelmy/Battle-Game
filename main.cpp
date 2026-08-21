@@ -290,7 +290,7 @@ short pageDraw(int playerHP, int computerHP)
     return playAgain;
 }
 
-void startGameLoop(stPlayer player, stComputer computer, bool checkHP)
+void startGameLoop(stPlayer &player, stComputer &computer, bool checkHP)
 {
     while (checkHP == false)
     {

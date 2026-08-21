@@ -262,14 +262,14 @@ short pageLose(int playerHP, int computerHP)
 {
     resetScreen();
     cout << "========================================" << endl
-         << endl;
+    << endl;
     cout << "                YOU LOST!               " << endl
-         << endl;
+    << endl;
     cout << "========================================" << endl
-         << endl
-         << endl;
+    << endl
+    << endl;
     cout << "                GAME OVER                " << endl
-         << endl;
+    << endl;
     cout << "Your HP: " << playerHP << endl;
     cout << "Computer HP: " << computerHP << endl
          << endl
@@ -278,9 +278,20 @@ short pageLose(int playerHP, int computerHP)
     return playAgain;
 }
 
-string startGame(stPlayer player, stComputer computer)
+short pageDraw(int playerHP, int computerHP)
 {
-    bool checkHP = false;
+    cout << "========================================" << endl << endl;
+    cout << "                  DRAW                  " << endl << endl;
+    cout << "========================================" << endl << endl << endl;
+    cout << "        Both players are defeated!      " << endl << endl;
+    cout << "Your HP: " << playerHP << endl;
+    cout << "Enemy's HP: " << computerHP << endl << endl << endl;
+    short playAgain = printPlayAgain();
+    return playAgain;
+}
+
+void startGameLoop(stPlayer player, stComputer computer, bool checkHP)
+{
     while (checkHP == false)
     {
         resetScreen();
@@ -359,10 +370,20 @@ string startGame(stPlayer player, stComputer computer)
         cout << "Press any key to continue ..";
         char input = _getch();
     }
+}
+
+
+string startGame(stPlayer player, stComputer computer)
+{
+    bool checkHP = false;
+
+    startGameLoop(player, computer, checkHP);
 
     if (player.playerHP <= 0 && computer.computerHP <= 0)
     {
-        /* code */
+        player.playerHP = 0;
+        computer.computerHP = 0;
+        short pageD = pageDraw(player.playerHP, computer.computerHP);
     }
     else if (computer.computerHP <= 0)
     {

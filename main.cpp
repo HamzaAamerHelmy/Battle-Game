@@ -280,6 +280,8 @@ short pageLose(int playerHP, int computerHP)
 
 short pageDraw(int playerHP, int computerHP)
 {
+    resetScreen();
+
     cout << "========================================" << endl << endl;
     cout << "                  DRAW                  " << endl << endl;
     cout << "========================================" << endl << endl << endl;
@@ -384,6 +386,12 @@ string startGame(stPlayer player, stComputer computer)
         player.playerHP = 0;
         computer.computerHP = 0;
         short pageD = pageDraw(player.playerHP, computer.computerHP);
+        
+        if (pageD == 1)
+        {
+            /* code */
+        }
+        
     }
     else if (computer.computerHP <= 0)
     {

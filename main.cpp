@@ -1,4 +1,5 @@
 #include <iostream>
+#include <windows.h>
 #include <conio.h>
 using namespace std;
 
@@ -367,14 +368,15 @@ string startGame(stPlayer player, stComputer computer)
     else if (computer.computerHP <= 0)
     {
         computer.computerHP = 0;
-        if (pageWin(player.playerHP, computer.computerHP) == 1)
+        short pageW = pageWin(player.playerHP, computer.computerHP);
+        if (pageW == 1)
         {
             resetScreen();
             player.playerHP = 100;
             computer.computerHP = 100;
             startGame(player, computer);
         }
-        else if (pageWin(player.playerHP, computer.computerHP) == 2)
+        else if (pageW == 2)
         {
             return "Main";
         }
@@ -387,14 +389,15 @@ string startGame(stPlayer player, stComputer computer)
     else
     {
         player.playerHP = 0;
-        if (pageLose(player.playerHP, computer.computerHP) == 1)
+        short pageL = pageLose(player.playerHP, computer.computerHP);
+        if (pageL == 1)
         {
             resetScreen();
             player.playerHP = 100;
             computer.computerHP = 100;
             startGame(player, computer);
         }
-        else if (pageLose(player.playerHP, computer.computerHP) == 2)
+        else if (pageL == 2)
         {
             return "Main";
         }

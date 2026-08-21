@@ -238,7 +238,7 @@ short printPlayAgain()
     return choose;
 }
 
-string pageWin(int playerHP, int computerHP)
+short pageWin(int playerHP, int computerHP)
 {
     resetScreen();
     cout << "========================================" << endl
@@ -254,23 +254,11 @@ string pageWin(int playerHP, int computerHP)
     cout << "Enemy HP: " << computerHP << endl
          << endl
          << endl;
-    if (printPlayAgain() == 1)
-    {
-        return "Play";
-    }
-    else if (printPlayAgain() == 2)
-    {
-        return "Main";
-    }
-    else
-    {
-        return "Exit";
-    }
-
-    return "Wrong";
+    short playAgain = printPlayAgain();
+    return playAgain;
 }
 
-string pageLose(int playerHP, int computerHP)
+short pageLose(int playerHP, int computerHP)
 {
     resetScreen();
     cout << "========================================" << endl
@@ -286,23 +274,11 @@ string pageLose(int playerHP, int computerHP)
     cout << "Computer HP: " << computerHP << endl
          << endl
          << endl;
-    if (printPlayAgain() == 1)
-    {
-        return "Play";
-    }
-    else if (printPlayAgain() == 2)
-    {
-        return "Main";
-    }
-    else
-    {
-        return "Exit";
-    }
-
-    return "Wrong";
+    short playAgain = printPlayAgain();
+    return playAgain;
 }
 
-bool startGame(stPlayer player, stComputer computer)
+string startGame(stPlayer player, stComputer computer)
 {
     bool checkHP = false;
     while (checkHP == false)
@@ -391,43 +367,43 @@ bool startGame(stPlayer player, stComputer computer)
     else if (computer.computerHP <= 0)
     {
         computer.computerHP = 0;
-        if (pageWin(player.playerHP, computer.computerHP) == "Play")
+        if (pageWin(player.playerHP, computer.computerHP) == 1)
         {
             resetScreen();
             player.playerHP = 100;
             computer.computerHP = 100;
             startGame(player, computer);
         }
-        else if (pageWin(player.playerHP, computer.computerHP) == "Main")
+        else if (pageWin(player.playerHP, computer.computerHP) == 2)
         {
-            return true;
+            return "Main";
         }
         else
         {
-            return false;
+            return "Exit";
         }
         
     }
     else
     {
         player.playerHP = 0;
-        if (pageLose(player.playerHP, computer.computerHP) == "Play")
+        if (pageLose(player.playerHP, computer.computerHP) == 1)
         {
             resetScreen();
             player.playerHP = 100;
             computer.computerHP = 100;
             startGame(player, computer);
         }
-        else if (pageLose(player.playerHP, computer.computerHP) == "Main")
+        else if (pageLose(player.playerHP, computer.computerHP) == 2)
         {
-            return true;
+            return "Main";
         }
         else
         {
-            return false;
+            return "Exit";
         }
     }
-    return false;
+    return "Wrong";
 }
 
 void PlayGame(short &choose, stPlayer player, stComputer computer)
@@ -438,9 +414,10 @@ void PlayGame(short &choose, stPlayer player, stComputer computer)
     {
         if (choose == 1)
         {
-            if (startGame(player, computer) == false)
+            string startGameText = startGame(player, computer);
+            if (startGameText == "Exit")
             {
-                return;
+                exit(0);
             }
         }
         else if (choose == 2)

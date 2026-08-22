@@ -389,9 +389,19 @@ string startGame(stPlayer player, stComputer computer)
         
         if (pageD == 1)
         {
-            /* code */
+            resetScreen();
+            player.playerHP = 100;
+            computer.computerHP = 100;
+            startGame(player, computer);
         }
-        
+        else if (pageD == 2)
+        {
+            return "Main";
+        }
+        else
+        {
+            return "Exit";
+        }
     }
     else if (computer.computerHP <= 0)
     {

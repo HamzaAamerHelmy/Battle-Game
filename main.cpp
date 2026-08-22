@@ -384,7 +384,7 @@ string startGame(stPlayer player, stPlayer computer)
             resetScreen();
             player.HP = 100;
             computer.HP = 100;
-            startGame(player, computer);
+            return startGame(player, computer);
         }
         else if (pageD == 2)
         {
@@ -404,7 +404,7 @@ string startGame(stPlayer player, stPlayer computer)
             resetScreen();
             player.HP = 100;
             computer.HP = 100;
-            startGame(player, computer);
+            return startGame(player, computer);
         }
         else if (pageW == 2)
         {
@@ -425,7 +425,7 @@ string startGame(stPlayer player, stPlayer computer)
             resetScreen();
             player.HP = 100;
             computer.HP = 100;
-            startGame(player, computer);
+            return startGame(player, computer);
         }
         else if (pageL == 2)
         {

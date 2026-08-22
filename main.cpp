@@ -374,7 +374,6 @@ void startGameLoop(stPlayer &player, stComputer &computer, bool checkHP)
     }
 }
 
-
 string startGame(stPlayer player, stComputer computer)
 {
     bool checkHP = false;

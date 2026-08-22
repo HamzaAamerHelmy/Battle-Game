@@ -11,16 +11,9 @@ enum enActions
 
 struct stPlayer
 {
-    int playerHP = 100;
-    enActions playerAction;
-    string playerActionText = "";
-};
-
-struct stComputer
-{
-    int computerHP = 100;
-    enActions computerAction;
-    string computerActionText = "";
+    int HP = 100;
+    enActions Action;
+    string ActionText = "";
 };
 
 int randomNumber(int from, int to)
@@ -125,22 +118,22 @@ string getChooseText(enActions action)
     return "Wrong";
 }
 
-void checkChooses(stPlayer &player, stComputer &computer)
+void checkChooses(stPlayer &player, stPlayer &computer)
 {
-    if (player.playerAction == enActions::defend && computer.computerAction == enActions::defend)
+    if (player.Action == enActions::defend && computer.Action == enActions::defend)
     {
         cout << "Both defended ." << endl;
     }
 
-    switch (player.playerAction)
+    switch (player.Action)
     {
     case enActions::attack:
     {
         int randomNumberAttack = randomNumber(10, 25);
 
-        if (computer.computerAction == enActions::defend)
+        if (computer.Action == enActions::defend)
         {
-            computer.computerHP = computer.computerHP - (randomNumberAttack / 2);
+            computer.HP = computer.HP - (randomNumberAttack / 2);
             cout << "Computer defended ." << endl
                  << endl;
             cout << "Your damage: " << randomNumberAttack << endl;
@@ -148,7 +141,7 @@ void checkChooses(stPlayer &player, stComputer &computer)
         }
         else
         {
-            computer.computerHP = computer.computerHP - randomNumberAttack;
+            computer.HP = computer.HP - randomNumberAttack;
             cout << "You dealt " << randomNumberAttack << " damage!" << endl;
         }
         break;
@@ -157,17 +150,17 @@ void checkChooses(stPlayer &player, stComputer &computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (player.playerHP >= 100)
+        if (player.HP >= 100)
         {
         }
         else
         {
-            player.playerHP = player.playerHP + randomNumberHeal;
+            player.HP = player.HP + randomNumberHeal;
         }
 
-        while (player.playerHP > 100)
+        while (player.HP > 100)
         {
-            player.playerHP--;
+            player.HP--;
         }
 
         cout << "You recovered " << randomNumberHeal << " HP!" << endl;
@@ -175,15 +168,15 @@ void checkChooses(stPlayer &player, stComputer &computer)
     }
     }
 
-    switch (computer.computerAction)
+    switch (computer.Action)
     {
     case enActions::attack:
     {
         int randomNumberAttack = randomNumber(10, 25);
 
-        if (player.playerAction == enActions::defend)
+        if (player.Action == enActions::defend)
         {
-            player.playerHP = player.playerHP - (randomNumberAttack / 2);
+            player.HP = player.HP - (randomNumberAttack / 2);
             cout << "You defended ." << endl
                  << endl;
             cout << "Incoming damage: " << randomNumberAttack << endl;
@@ -191,7 +184,7 @@ void checkChooses(stPlayer &player, stComputer &computer)
         }
         else
         {
-            player.playerHP = player.playerHP - randomNumberAttack;
+            player.HP = player.HP - randomNumberAttack;
             cout << "Computer dealt " << randomNumberAttack << " damage!" << endl;
         }
         break;
@@ -200,17 +193,17 @@ void checkChooses(stPlayer &player, stComputer &computer)
     {
         int randomNumberHeal = randomNumber(10, 25);
 
-        if (computer.computerHP >= 100)
+        if (computer.HP >= 100)
         {
         }
         else
         {
-            computer.computerHP = computer.computerHP + randomNumberHeal;
+            computer.HP = computer.HP + randomNumberHeal;
         }
 
-        while (computer.computerHP > 100)
+        while (computer.HP > 100)
         {
-            computer.computerHP--;
+            computer.HP--;
         }
 
         cout << "Computer recovered " << randomNumberHeal << " HP!" << endl;
@@ -292,7 +285,7 @@ short pageDraw(int playerHP, int computerHP)
     return playAgain;
 }
 
-void startGameLoop(stPlayer &player, stComputer &computer, bool checkHP)
+void startGameLoop(stPlayer &player, stPlayer &computer, bool checkHP)
 {
     while (checkHP == false)
     {
@@ -306,7 +299,7 @@ void startGameLoop(stPlayer &player, stComputer &computer, bool checkHP)
              << endl
              << endl;
         cout << "        YOU              COMPUTER" << endl;
-        cout << "      HP: " << player.playerHP << "             HP: " << computer.computerHP << endl
+        cout << "      HP: " << player.HP << "             HP: " << computer.HP << endl
              << endl;
         cout << "----------------------------------------" << endl
              << endl
@@ -334,11 +327,11 @@ void startGameLoop(stPlayer &player, stComputer &computer, bool checkHP)
         } while (userInput > 3 || userInput < 1);
 
         resetScreen();
-        player.playerAction = (enActions)userInput;
-        player.playerActionText = getChooseText(player.playerAction);
+        player.Action = (enActions)userInput;
+        player.ActionText = getChooseText(player.Action);
 
-        computer.computerAction = (enActions)fillComputerInput();
-        computer.computerActionText = getChooseText(computer.computerAction);
+        computer.Action = (enActions)fillComputerInput();
+        computer.ActionText = getChooseText(computer.Action);
 
         cout << "========================================" << endl
              << endl;
@@ -347,8 +340,8 @@ void startGameLoop(stPlayer &player, stComputer &computer, bool checkHP)
         cout << "========================================" << endl
              << endl
              << endl;
-        cout << "You Chose: " << player.playerActionText << endl;
-        cout << "Computer Chose: " << computer.computerActionText << endl
+        cout << "You Chose: " << player.ActionText << endl;
+        cout << "Computer Chose: " << computer.ActionText << endl
              << endl;
 
         checkChooses(player, computer);
@@ -357,14 +350,14 @@ void startGameLoop(stPlayer &player, stComputer &computer, bool checkHP)
         cout << "----------------------------------------" << endl
              << endl
              << endl;
-        cout << "Your HP: " << player.playerHP << endl;
-        cout << "Enemy HP: " << computer.computerHP << endl
+        cout << "Your HP: " << player.HP << endl;
+        cout << "Enemy HP: " << computer.HP << endl
              << endl
              << endl;
         cout << "----------------------------------------" << endl
              << endl;
 
-        if (player.playerHP <= 0 || computer.computerHP <= 0)
+        if (player.HP <= 0 || computer.HP <= 0)
         {
             checkHP = true;
         }
@@ -374,23 +367,23 @@ void startGameLoop(stPlayer &player, stComputer &computer, bool checkHP)
     }
 }
 
-string startGame(stPlayer player, stComputer computer)
+string startGame(stPlayer player, stPlayer computer)
 {
     bool checkHP = false;
 
     startGameLoop(player, computer, checkHP);
 
-    if (player.playerHP <= 0 && computer.computerHP <= 0)
+    if (player.HP <= 0 && computer.HP <= 0)
     {
-        player.playerHP = 0;
-        computer.computerHP = 0;
-        short pageD = pageDraw(player.playerHP, computer.computerHP);
+        player.HP = 0;
+        computer.HP = 0;
+        short pageD = pageDraw(player.HP, computer.HP);
         
         if (pageD == 1)
         {
             resetScreen();
-            player.playerHP = 100;
-            computer.computerHP = 100;
+            player.HP = 100;
+            computer.HP = 100;
             startGame(player, computer);
         }
         else if (pageD == 2)
@@ -402,15 +395,15 @@ string startGame(stPlayer player, stComputer computer)
             return "Exit";
         }
     }
-    else if (computer.computerHP <= 0)
+    else if (computer.HP <= 0)
     {
-        computer.computerHP = 0;
-        short pageW = pageWin(player.playerHP, computer.computerHP);
+        computer.HP = 0;
+        short pageW = pageWin(player.HP, computer.HP);
         if (pageW == 1)
         {
             resetScreen();
-            player.playerHP = 100;
-            computer.computerHP = 100;
+            player.HP = 100;
+            computer.HP = 100;
             startGame(player, computer);
         }
         else if (pageW == 2)
@@ -425,13 +418,13 @@ string startGame(stPlayer player, stComputer computer)
     }
     else
     {
-        player.playerHP = 0;
-        short pageL = pageLose(player.playerHP, computer.computerHP);
+        player.HP = 0;
+        short pageL = pageLose(player.HP, computer.HP);
         if (pageL == 1)
         {
             resetScreen();
-            player.playerHP = 100;
-            computer.computerHP = 100;
+            player.HP = 100;
+            computer.HP = 100;
             startGame(player, computer);
         }
         else if (pageL == 2)
@@ -446,7 +439,7 @@ string startGame(stPlayer player, stComputer computer)
     return "Wrong";
 }
 
-void PlayGame(short &choose, stPlayer player, stComputer computer)
+void PlayGame(short &choose, stPlayer player, stPlayer computer)
 {
     printMainMenuScreen();
     choose = readMainMenuChoose();
@@ -475,7 +468,7 @@ void RunApp()
 
     stPlayer player;
 
-    stComputer computer;
+    stPlayer computer;
 
     short choose = 0;
 

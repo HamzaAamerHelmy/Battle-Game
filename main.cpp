@@ -469,7 +469,7 @@ void PlayGame(short &choose, stPlayer player, stComputer computer)
     }
 }
 
-int main()
+void RunApp()
 {
     srand((unsigned)time(NULL));
 
@@ -480,6 +480,11 @@ int main()
     short choose = 0;
 
     PlayGame(choose, player, computer);
+}
+
+int main()
+{
+    RunApp();
 
     return 0;
 }
